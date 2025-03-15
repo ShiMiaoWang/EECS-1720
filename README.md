@@ -1,7 +1,7 @@
 # Super Madiao: A Dedicated Card Game
 
 ## Overview
-Super Madiao is a uniquely designed tabletop card game that blends traditional Chinese card game elements with modern design aesthetics. Players engage in strategic gameplay involving deception and psychological warfare, aiming to be the first to discard all their cards.
+Super Madiao is a uniquely designed tabletop card game. Players engage in strategic gameplay involving deception and psychological warfare, aiming to be the first to discard all their cards.
 
 ## Project Structure
 - **Backend**: Contains the game logic, class design, and core mechanics. This includes modeling game entities such as cards, players, and gameplay management.
