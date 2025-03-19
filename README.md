@@ -5,7 +5,7 @@ Super Madiao is a uniquely designed tabletop card game. Players engage in strate
 
 ## Project Structure
 - **Backend**: Contains the game logic, class design, and core mechanics. This includes modeling game entities such as cards, players, and gameplay management.
-- **Frontend**: Implements the graphical user interface (GUI) using Java Swing/AWT. Handles user interaction and event-driven updates.
+- **Frontend**: Implements the graphical user interface (GUI) using Java Swing/AWT.
 - **Testing**: Includes unit tests and a main method for demonstration to verify that game operations perform as expected.
 - **Documentation**: This README, UML diagrams, and additional notes detail the design decisions and project setup.
 
