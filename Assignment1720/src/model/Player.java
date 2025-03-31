@@ -1,35 +1,18 @@
-//Project Name: Super Madiao
-//Team Members: Filza Ahmed;      Shimiao Wang: 216814576
-//Date: 01/03/2025
-//Class: EECS-1720
 package model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The Player class represents a participant in the game, managing their hand of
- * cards.
- *
- * UML Reference: ----------------- - name: String - hand: List<Card> -
- * playCard(cards: List<Card>): void - challengePlayer(target: Player): Boolean
- * - receivePenalty(cards: List<Card>): void
- *
- * GUI Integration Notes: ----------------- 1. The GUI should display each
- * player's hand using getHand(). 2. A "Play Card" button should call playCard()
- * and update the UI. 3. The challengePlayer() method should trigger an in-game
- * challenge, updating both players. 4. When a penalty is applied, update the
- * player's hand visually.
+ * Represents a player in the game
  */
 public class Player {
 
-	private String name; // Player's name
-	private List<Card> hand; // The player's hand of cards
+	private String name;         // Player name
+	private ArrayList<Card> hand;  // Player's hand of cards
 
 	/**
-	 * Constructs a new player with a given name.
-	 * 
-	 * @param name The player's name.
+	 * Create a new player
 	 */
 	public Player(String name) {
 		this.name = name;
@@ -37,61 +20,36 @@ public class Player {
 	}
 
 	/**
-	 * Gets the player's name.
-	 * 
-	 * @return The player's name.
+	 * Get player name
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * Gets the player's current hand.
-	 * 
-	 * @return The list of cards in the player's hand.
+	 * Get player's hand
 	 */
 	public List<Card> getHand() {
 		return new ArrayList<>(hand);
 	}
 
 	/**
-	 * Adds a card to the player's hand.
-	 * 
-	 * @param card The card to add.
+	 * Receive a card
 	 */
 	public void receiveCard(Card card) {
-		card.revealCard();
-	    hand.add(card);
+		card.revealCard();  // Visible to the player
+		hand.add(card);
 	}
 
 	/**
-	 * Plays a set of cards from the player's hand. Removes them from the hand and
-	 * returns them for game processing.
-	 *
-	 * @param cards The list of cards the player wants to play.
+	 * Play a set of cards
 	 */
 	public void playCard(List<Card> cards) {
 		hand.removeAll(cards);
 	}
 
-//	/** Moved to Manager.java
-//	 * Challenges another player's play.
-//	 * 
-//	 * @param target The player being challenged.
-//	 * @return True if the challenge was successful (target was lying), false
-//	 *         otherwise.
-//	 */
-//	public boolean challengePlayer(Player target) {
-//		// The GameManager should handle challenge logic,
-//		// but we assume it interacts with this method.
-//		return false; // Placeholder (actual check should be in GameManager)
-//	}
-
 	/**
-	 * Applies a penalty to the player by adding a list of cards to their hand. This
-	 * happens when a challenge fails.
-	 * 
-	 * @param cards The penalty cards to be added.
+	 * Receive penalty cards
 	 */
 	public void receivePenalty(List<Card> cards) {
 		hand.addAll(cards);

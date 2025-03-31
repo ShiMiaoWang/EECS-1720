@@ -1,19 +1,20 @@
-//Project Name: Super Madiao
-//Team Members: Filza Ahmed;      Shimiao Wang: 216814576
-//Date: 01/03/2025
-//Class: EECS-1720
-
 package model;
 
 import java.util.List;
 
+/**
+ * Manages game flow and rules
+ */
 public class Manager {
-	private List<Player> players;
-	private Deck deck;
-	private Pile pile;
-	private DiscardPile discardPile;
-	private int currentPlayerIndex = 0; // trace
+	private List<Player> players;        // All players
+	private Deck deck;                   // Card deck
+	private Pile pile;                   // Play pile
+	private DiscardPile discardPile;     // Discard pile
+	private int currentPlayerIndex = 0;  // Current player index
 
+	/**
+	 * Create game manager and deal cards
+	 */
 	public Manager(List<Player> players) {
 		this.players = players;
 		this.deck = new Deck();
@@ -22,7 +23,9 @@ public class Manager {
 		dealInitialCards();
 	}
 
-	// Start
+	/**
+	 * Deal initial cards
+	 */
 	private void dealInitialCards() {
 		deck.shuffle();
 		while (deck.size() > 0) {
@@ -34,43 +37,55 @@ public class Manager {
 		}
 	}
 
-	// logic 1(play cards)
+	/**
+	 * Player plays cards
+	 */
 	public void playCards(Player player, List<Card> cards, Card.Rank declaredRank) {
+		// Check if it's this player's turn
 		if (player != getCurrentPlayer()) {
-			throw new IllegalStateException("Not your turn！");
-		}
-		if (!player.getHand().containsAll(cards)) {
-			throw new IllegalArgumentException("You don't have these cards！");
-		}
-		if (cards.size() < 1 || cards.size() > 4) {
-			throw new IllegalArgumentException("You have to play 1-4 cards！");
+			throw new IllegalStateException("Not your turn!");
 		}
 
+		// Check if player has these cards
+		if (!player.getHand().containsAll(cards)) {
+			throw new IllegalArgumentException("You don't have these cards!");
+		}
+
+		// Check number of cards played
+		if (cards.size() < 1 || cards.size() > 4) {
+			throw new IllegalArgumentException("You must play 1-4 cards!");
+		}
+
+		// Execute the play
 		player.playCard(cards);
 		Play play = new Play(player, cards, declaredRank);
 		pile.addPlay(play);
 		nextPlayer();
 	}
 
-	// Challenge moved to here
+	/**
+	 * Challenge another player
+	 */
 	public boolean challengePlayer(Player challenger) {
 		Play lastPlay = pile.getLastPlay();
 		if (lastPlay == null)
-			return false; // no card to challenge
+			return false; // No play to challenge
 
-		if (!lastPlay.matchesDeclaration()) { // challenge succeed
+		if (!lastPlay.matchesDeclaration()) { // Challenge successful
 			Player target = lastPlay.getPlayer();
 			target.receivePenalty(pile.getAllCards());
 			pile.clearPile();
 			return true;
-		} else { // failed
+		} else { // Challenge failed
 			challenger.receivePenalty(pile.getAllCards());
 			pile.clearPile();
 			return false;
 		}
 	}
 
-	// Winner Checker
+	/**
+	 * Check if any player has won
+	 */
 	public Player checkForWinner() {
 		for (Player player : players) {
 			if (player.getHand().isEmpty())
@@ -79,12 +94,16 @@ public class Manager {
 		return null;
 	}
 
-	// switch to nextPlayer
+	/**
+	 * Switch to the next player
+	 */
 	public void nextPlayer() {
 		currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 	}
 
-	// getCurrentPlayer
+	/**
+	 * Get current player
+	 */
 	public Player getCurrentPlayer() {
 		return players.get(currentPlayerIndex);
 	}
@@ -96,5 +115,4 @@ public class Manager {
 	public DiscardPile getDiscardPile() {
 		return discardPile;
 	}
-
 }

@@ -6,15 +6,7 @@ import java.awt.event.ActionListener;
 
 public class HomePageButtons extends JButton {
 
-	/**
-	 * 
-	 * @param iconPath
-	 * @param width
-	 * @param height
-	 * @param onClick
-	 */
 	public HomePageButtons(String iconPath, int width, int height, ActionListener onClick) {
-
 		ImageIcon icon = new ImageIcon(getClass().getResource(iconPath));
 		Image scaledImage = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
 		setIcon(new ImageIcon(scaledImage));

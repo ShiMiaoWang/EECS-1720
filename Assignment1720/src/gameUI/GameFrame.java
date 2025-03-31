@@ -11,22 +11,24 @@ import java.util.List;
 
 public class GameFrame extends JFrame {
 
-    private InfoPanel infoPanel;
-    private HandPanel handPanel;
-    private JPanel playAreaPanel;
+    private InfoPanel infoPanel;         // Information panel
+    private HandPanel handPanel;         // Hand panel
+    private JPanel playAreaPanel;        // Play area
 
     public GameFrame() {
-        setTitle("Super Madiao - Game On");
+        // Set window properties
+        setTitle("SuperMadiao!");
         setSize(1152, 864);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        // Create main panel
         JPanel mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setBackground(new Color(34, 45, 65));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
 
-        // === 1~3 顶部 InfoPanel ===
+        // === Top information panel ===
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 3;
@@ -34,7 +36,7 @@ public class GameFrame extends JFrame {
         mainPanel.add(infoPanel, gbc);
         gbc.gridwidth = 1;
 
-        // === 4 HandPanel（玩家手牌） ===
+        // === Player hand area ===
         gbc.gridx = 0;
         gbc.gridy = 1;
         List<ImageIcon> sampleCards = loadSampleHand();
@@ -46,33 +48,33 @@ public class GameFrame extends JFrame {
         handScrollPane.setBorder(null);
         mainPanel.add(handScrollPane, gbc);
 
-        // === 5 Play Area ===
+        // === Play area ===
         gbc.gridx = 1;
         playAreaPanel = new JPanel(new FlowLayout());
         playAreaPanel.setPreferredSize(new Dimension(250, 100));
         playAreaPanel.setBackground(new Color(55, 66, 88));
         mainPanel.add(playAreaPanel, gbc);
 
-        // === 6 Deck ===
+        // === Deck area ===
         gbc.gridx = 2;
         mainPanel.add(createPlaceholderPanel("Deck"), gbc);
 
-        // === 7 Declare ===
+        // === Declaration area ===
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 2;
-        mainPanel.add(createPlaceholderPanel("Declare Area"), gbc);
+        mainPanel.add(createPlaceholderPanel("Declaration Area"), gbc);
         gbc.gridwidth = 1;
 
-        // === 8 Challenge Button ===
+        // === Challenge button ===
         gbc.gridx = 2;
         JButton challengeBtn = new JButton("Challenge");
         mainPanel.add(challengeBtn, gbc);
 
-        // === 临时出牌按钮：测试用 ===
+        // === test ===
         gbc.gridy = 3;
         gbc.gridx = 1;
-        JButton playBtn = new JButton("Play Selected");
+        JButton playBtn = new JButton("Play Selected Cards");
         playBtn.addActionListener(e -> {
             List<CardComponent> selected = handPanel.getSelectedCards();
             for (CardComponent card : selected) {
@@ -89,7 +91,7 @@ public class GameFrame extends JFrame {
     }
 
     private List<ImageIcon> loadSampleHand() {
-        List<ImageIcon> hand = new ArrayList<>();
+        ArrayList<ImageIcon> hand = new ArrayList<>();
         String[] cardNames = {"chalices", "coins", "swords", "wands"};
         for (int i = 0; i < 8; i++) {
             String name = cardNames[i % cardNames.length];
@@ -97,6 +99,7 @@ public class GameFrame extends JFrame {
         }
         return hand;
     }
+
 
     private JPanel createPlaceholderPanel(String text) {
         JPanel panel = new JPanel();

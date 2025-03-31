@@ -9,13 +9,16 @@ public class InfoPanel extends JPanel {
     private JLabel cardCountLabel;
 
     public InfoPanel() {
-        setLayout(new GridLayout(1, 3, 20, 0)); // 横向3列布局，带间距
-        setOpaque(false); // 背景透明
+        // Set layout and background
+        setLayout(new GridLayout(1, 3, 20, 0));
+        setOpaque(false);
 
+        // Create labels
         roundLabel = createLabel("Round: 1");
         playerLabel = createLabel("Player: Wesley");
         cardCountLabel = createLabel("Cards Left: 13");
 
+        // Add to panel
         add(roundLabel);
         add(playerLabel);
         add(cardCountLabel);
@@ -28,7 +31,6 @@ public class InfoPanel extends JPanel {
         return label;
     }
 
-    // --- 提供更新方法，便于外部调用 ---
     public void setRound(int round) {
         roundLabel.setText("Round: " + round);
     }

@@ -7,7 +7,7 @@ public class BackgroundPanel extends JPanel {
 	private Image backgroundImage;
 
 	public BackgroundPanel() {
-		// load background: title.png
+		// Load image
 		backgroundImage = new ImageIcon(getClass().getResource("/icons/title.png")).getImage();
 		setLayout(new BorderLayout());
 	}
@@ -15,7 +15,7 @@ public class BackgroundPanel extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		// Draw image
 		g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-
 	}
 }
